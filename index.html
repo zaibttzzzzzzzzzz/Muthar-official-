@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muthar Official - Pakistani Number Lookup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a00e0;
+            --secondary: #8e2de2;
+            --accent: #f9c74f;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .search-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .search-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .result-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .carrier-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Muthar Official</div>
+        <div class="tagline">Pakistan's Most Accurate Number Information System</div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Enter Pakistani Mobile Number (e.g. 03001234567)" maxlength="11">
+            <button class="search-btn">Check Number</button>
+        </div>
+        
+        <div class="result-card" id="result">
+            <img src="#" alt="Carrier Logo" class="carrier-logo" id="carrier-logo">
+            <h2 id="carrier-name">Jazz (Mobilink)</h2>
+            <p id="number-type">Prepaid</p>
+            <p id="location">Lahore, Punjab</p>
+            <p id="number-status">Active</p>
+        </div>
+        
+        <div class="footer">
+            © 2023 Muthar Official | All Rights Reserved
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript functionality will be added here
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const number = document.querySelector('.search-input').value;
+            if(number.length === 11 && /^[0-9]+$/.test(number)) {
+                // This is where the lookup logic would go
+                // For now we'll show a sample result
+                document.getElementById('result').style.display = 'block';
+                
+                // Sample response - in real implementation this would come from your backend
+                const prefix = number.substring(0, 4);
+                let carrier = "Unknown";
+                let logo = "";
+                
+                if(prefix === "0300" || prefix === "0301" || prefix === "0302" || prefix === "0303" || prefix === "0304") {
+                    carrier = "Jazz (Mobilink)";
+                    logo = "jazz-logo.png";
+                } else if(prefix === "0310" || prefix === "0311" || prefix === "0312" || prefix === "0313" || prefix === "0314") {
+                    carrier = "Zong";
+                    logo = "zong-logo.png";
+                } else if(prefix === "0320" || prefix === "0321" || prefix === "0322" || prefix === "0323" || prefix === "0324") {
+                    carrier = "Warid";
+                    logo = "warid-logo.png";
+                } else if(prefix === "0330" || prefix === "0331" || prefix === "0332" || prefix === "0333" || prefix === "0334") {
+                    carrier = "Ufone";
+                    logo = "ufone-logo.png";
+                } else if(prefix === "0340" || prefix === "0341" || prefix === "0342" || prefix === "0343" || prefix === "0344") {
+                    carrier = "Telenor";
+                    logo = "telenor-logo.png";
+                }
+                
+                document.getElementById('carrier-name').textContent = carrier;
+                document.getElementById('carrier-logo').src = logo;
+                document.getElementById('number-type').textContent = Math.random() > 0.5 ? "Prepaid" : "Postpaid";
+                
+                const cities = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Multan", "Peshawar", "Quetta"];
+                document.getElementById('location').textContent = cities[Math.floor(Math.random() * cities.length)];
+            } else {
+                alert("Please enter a valid 11-digit Pakistani mobile number");
+            }
+        });
+    </script>
+</body>
+</html>
